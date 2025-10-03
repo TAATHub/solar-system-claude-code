@@ -20,6 +20,13 @@ struct ImmersiveView: View {
                 // Put skybox here.  See example in World project available at
                 // https://developer.apple.com/
             }
+
+            // サイズ1.0の赤い球体を作成
+            let sphereMesh = MeshResource.generateSphere(radius: 0.5)
+            let redMaterial = SimpleMaterial(color: .red, isMetallic: false)
+            let sphereEntity = ModelEntity(mesh: sphereMesh, materials: [redMaterial])
+
+            content.add(sphereEntity)
         }
     }
 }
