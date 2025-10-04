@@ -14,19 +14,14 @@ struct RotationSystem: System {
 
     func update(context: SceneUpdateContext) {
         for entity in context.entities(matching: Self.query, updatingSystemWhen: .rendering) {
-            guard var rotationComponent = entity.components[RotationComponent.self] else { continue }
+            guard let rotationComponent = entity.components[RotationComponent.self] else { continue }
 
-            // 累積角度を更新
-            rotationComponent.currentAngle += rotationComponent.angularVelocity * Float(context.deltaTime)
-
-            // 固定された回転軸に対して絶対的な回転を適用
-            entity.orientation = simd_quatf(
-                angle: rotationComponent.currentAngle,
+            // 回転軸に対して相対的に回転を適用
+            let rotation = simd_quatf(
+                angle: rotationComponent.angularVelocity * Float(context.deltaTime),
                 axis: rotationComponent.axis
             )
-
-            // コンポーネントを更新
-            entity.components[RotationComponent.self] = rotationComponent
+            entity.setOrientation(rotation, relativeTo: entity)
         }
     }
 }

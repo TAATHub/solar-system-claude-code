@@ -36,17 +36,16 @@ struct ImmersiveView: View {
             let redMaterial = SimpleMaterial(color: .red, isMetallic: false)
             let cubeEntity = ModelEntity(mesh: cubeMesh, materials: [redMaterial])
 
-            // 半径1mの位置に配置（X軸方向）
-            cubeEntity.transform.translation = SIMD3<Float>(1, 0, 0)
+            // y軸から30°傾けた回転を設定
+            let tiltAngle = Float(30.0 * .pi / 180.0)
+            let tiltRotation = simd_quatf(angle: tiltAngle, axis: SIMD3<Float>(1, 0, 0))
+            cubeEntity.transform.rotation = tiltRotation
 
-            // OrbitComponentを追加（半径1m、周期10秒、Y軸まわり）
-            cubeEntity.components.set(OrbitComponent(radius: 1.0, period: 10.0, axis: [0, 1, 0]))
+            // OrbitComponentを追加（半径3m、周期5秒、Y軸まわり）
+            cubeEntity.components.set(OrbitComponent(radius: 3.0, period: 5.0, axis: [0, 1, 0]))
 
-            // RotationComponentを追加（垂直方向から30°傾けた軸で自転、周期5秒）
-            // 垂直方向（Y軸）から30°傾けた軸を計算
-            let tiltAngle = Float(30.0 * .pi / 180.0) // 30度をラジアンに変換
-            let rotationAxis = SIMD3<Float>(sin(tiltAngle), cos(tiltAngle), 0)
-            cubeEntity.components.set(RotationComponent(axis: rotationAxis, period: 5.0))
+            // RotationComponentを追加（y軸方向で自転、周期1秒）
+            cubeEntity.components.set(RotationComponent(axis: [0, 1, 0], period: 1.0))
 
             origin.addChild(cubeEntity)
         }
