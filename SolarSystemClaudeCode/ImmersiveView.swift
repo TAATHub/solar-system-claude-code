@@ -10,42 +10,41 @@ import RealityKit
 import RealityKitContent
 
 struct ImmersiveView: View {
-    @State private var startTime = Date()
 
     var body: some View {
-        TimelineView(.animation) { context in
-            let elapsed = context.date.timeIntervalSince(startTime)
+        RealityView { content in
+            // Add the initial RealityKit content
+            if let immersiveContentEntity = try? await Entity(named: "Immersive", in: realityKitContentBundle) {
+                content.add(immersiveContentEntity)
 
-            // 10秒で1周 (角速度 = 2π / 10)
-            let angularVelocity = 2.0 * .pi / 10.0
-            let angle = Float(elapsed * angularVelocity)
+                // Put skybox here.  See example in World project available at
+                // https://developer.apple.com/
+            }
 
-            // 半径1の円周運動
-            let radius: Float = 1.0
-            let x = radius * cos(angle)
-            let z = radius * sin(angle)
+            // 原点に基準エンティティを配置
+            let origin = Entity()
+            content.add(origin)
 
-            RealityView { content in
-                // Add the initial RealityKit content
-                if let immersiveContentEntity = try? await Entity(named: "Immersive", in: realityKitContentBundle) {
-                    content.add(immersiveContentEntity)
+            // サイズ1.0の赤い球体を作成
+            let sphereMesh = MeshResource.generateSphere(radius: 0.5)
+            let redMaterial = SimpleMaterial(color: .red, isMetallic: false)
+            let sphereEntity = ModelEntity(mesh: sphereMesh, materials: [redMaterial])
 
-                    // Put skybox here.  See example in World project available at
-                    // https://developer.apple.com/
-                }
+            // 半径1mの位置に配置（X軸方向）
+            sphereEntity.transform.translation = SIMD3<Float>(1, 0, 0)
+            origin.addChild(sphereEntity)
 
-                // サイズ1.0の赤い球体を作成
-                let sphereMesh = MeshResource.generateSphere(radius: 0.5)
-                let redMaterial = SimpleMaterial(color: .red, isMetallic: false)
-                let sphereEntity = ModelEntity(mesh: sphereMesh, materials: [redMaterial])
-                sphereEntity.name = "redSphere"
+            // 原点まわりにY軸で10秒/周の軌道アニメーション
+            let orbit = OrbitAnimation(
+                duration: 10.0,                     // 1周 = 10秒
+                axis: [0, 1, 0],                    // Y軸まわり
+                startTransform: sphereEntity.transform,
+                bindTarget: .transform,
+                repeatMode: .repeat                 // 無限ループ
+            )
 
-                content.add(sphereEntity)
-            } update: { content in
-                // 球体の位置を更新
-                if let sphereEntity = content.entities.first(where: { $0.name == "redSphere" }) {
-                    sphereEntity.position = [x, 0, z]
-                }
+            if let animationResource = try? AnimationResource.generate(with: orbit) {
+                sphereEntity.playAnimation(animationResource)
             }
         }
     }
