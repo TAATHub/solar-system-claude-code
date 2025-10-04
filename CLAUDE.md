@@ -8,6 +8,11 @@
 - SwiftUI
 - RealityKit
 
+## コーディングガイドライン
+
+@.claude/RealityKitDevelopmentRules.md
+@.claude/visionOSWindowManagement.md
+
 ## ビルド&実行
 
 **作業完了時は必ずbuild-and-run-executorを使ってビルド&実行すること**
