@@ -27,6 +27,23 @@ struct ImmersiveView: View {
             let sphereEntity = ModelEntity(mesh: sphereMesh, materials: [redMaterial])
 
             content.add(sphereEntity)
+        } update: { content in
+            // 経過時間を取得
+            let elapsed = CACurrentMediaTime()
+
+            // 10秒で1周 (角速度 = 2π / 10)
+            let angularVelocity = 2.0 * .pi / 10.0
+            let angle = Float(elapsed * angularVelocity)
+
+            // 半径1の円周運動
+            let radius: Float = 1.0
+            let x = radius * cos(angle)
+            let z = radius * sin(angle)
+
+            // 球体の位置を更新
+            if let sphereEntity = content.entities.first(where: { $0 is ModelEntity }) {
+                sphereEntity.position = [x, 0, z]
+            }
         }
     }
 }
