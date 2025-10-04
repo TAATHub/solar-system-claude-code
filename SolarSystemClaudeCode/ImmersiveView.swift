@@ -13,6 +13,9 @@ struct ImmersiveView: View {
 
     var body: some View {
         RealityView { content in
+            // OrbitSystemを登録
+            OrbitSystem.registerSystem()
+
             // Add the initial RealityKit content
             if let immersiveContentEntity = try? await Entity(named: "Immersive", in: realityKitContentBundle) {
                 content.add(immersiveContentEntity)
@@ -32,20 +35,11 @@ struct ImmersiveView: View {
 
             // 半径1mの位置に配置（X軸方向）
             sphereEntity.transform.translation = SIMD3<Float>(1, 0, 0)
+
+            // OrbitComponentを追加（半径1m、周期10秒、Y軸まわり）
+            sphereEntity.components.set(OrbitComponent(radius: 1.0, period: 10.0, axis: [0, 1, 0]))
+
             origin.addChild(sphereEntity)
-
-            // 原点まわりにY軸で10秒/周の軌道アニメーション
-            let orbit = OrbitAnimation(
-                duration: 10.0,                     // 1周 = 10秒
-                axis: [0, 1, 0],                    // Y軸まわり
-                startTransform: sphereEntity.transform,
-                bindTarget: .transform,
-                repeatMode: .repeat                 // 無限ループ
-            )
-
-            if let animationResource = try? AnimationResource.generate(with: orbit) {
-                sphereEntity.playAnimation(animationResource)
-            }
         }
     }
 }
