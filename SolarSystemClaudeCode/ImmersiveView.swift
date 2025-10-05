@@ -45,7 +45,7 @@ struct ImmersiveView: View {
             cubeEntity.components.set(OrbitComponent(radius: 5.0, period: 10.0, axis: [0, 1, 0]))
 
             // RotationComponentを追加（y軸方向で自転、周期1秒）
-            cubeEntity.components.set(RotationComponent(axis: [0, 1, 0], period: 1.0))
+            cubeEntity.components.set(RotationComponent(axis: [0, 1, 0], period: 5.0))
 
             origin.addChild(cubeEntity)
 
@@ -54,16 +54,21 @@ struct ImmersiveView: View {
             let whiteMaterial = SimpleMaterial(color: .white, isMetallic: false)
             let whiteCubeEntity = ModelEntity(mesh: whiteCubeMesh, materials: [whiteMaterial])
 
-            // y軸から30°傾けた回転を設定
-           let whiteTiltAngle = Float(30.0 * .pi / 180.0)
-           let whiteTiltRotation = simd_quatf(angle: whiteTiltAngle, axis: SIMD3<Float>(1, 0, 0))
-           whiteCubeEntity.transform.rotation = whiteTiltRotation
+            // 親(赤いキューブ)の回転の逆回転を計算
+            let parentRotationInverse = cubeEntity.transform.rotation.inverse
+
+            // 白いキューブの目標回転(y軸から30°傾き)
+            let whiteTiltAngle = Float(-30.0 * .pi / 180.0)
+            let whiteTargetRotation = simd_quatf(angle: whiteTiltAngle, axis: SIMD3<Float>(1, 0, 0))
+
+            // 親の影響を相殺するために、逆回転と目標回転を合成
+            whiteCubeEntity.transform.rotation = parentRotationInverse * whiteTargetRotation
 
             // OrbitComponentを追加（半径2.0m、周期1.0秒、Y軸まわり）
             whiteCubeEntity.components.set(OrbitComponent(radius: 2.0, period: 10.0, axis: [0, 1, 0]))
 
             // RotationComponentを追加（y軸方向で自転、周期1.0秒）
-            whiteCubeEntity.components.set(RotationComponent(axis: [0, 1, 0], period: 1.0))
+            whiteCubeEntity.components.set(RotationComponent(axis: [0, 1, 0], period: 5.0))
 
             cubeEntity.addChild(whiteCubeEntity)
         }
