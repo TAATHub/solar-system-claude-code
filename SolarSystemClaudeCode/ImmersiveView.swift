@@ -32,46 +32,32 @@ struct ImmersiveView: View {
             content.add(origin)
 
             // === 赤いキューブのセットアップ ===
-            // 公転用のContainer Entity
-            let redOrbitContainer = Entity()
-            redOrbitContainer.components.set(OrbitComponent(radius: 5.0, period: 10.0, axis: [0, 1, 0]))
-            origin.addChild(redOrbitContainer)
-
-            // サイズ1.0の赤いキューブを作成
-            let cubeMesh = MeshResource.generateBox(size: 1.0)
-            let redMaterial = SimpleMaterial(color: .red, isMetallic: false)
-            let cubeEntity = ModelEntity(mesh: cubeMesh, materials: [redMaterial])
-
-            // y軸から30°傾けた回転を設定
-            let tiltAngle = Float(30.0 * .pi / 180.0)
-            let tiltRotation = simd_quatf(angle: tiltAngle, axis: SIMD3<Float>(1, 0, 0))
-            cubeEntity.transform.rotation = tiltRotation
-
-            // RotationComponentを追加（y軸方向で自転、周期1秒）
-            cubeEntity.components.set(RotationComponent(axis: [0, 1, 0], period: 1.0))
-
-            redOrbitContainer.addChild(cubeEntity)
+            let redCubeModel = CelestialBodyModel(
+                size: 1.0,
+                color: .red,
+                tiltAngleDegrees: 30.0,
+                rotationPeriod: 1.0,
+                orbitRadius: 5.0,
+                orbitPeriod: 10.0
+            )
+            let (redOrbitContainer, _) = CelestialBodyFactory.addCelestialBody(
+                model: redCubeModel,
+                to: origin
+            )
 
             // === 白いキューブのセットアップ ===
-            // 公転用のContainer Entity
-            let whiteOrbitContainer = Entity()
-            whiteOrbitContainer.components.set(OrbitComponent(radius: 2.0, period: 2.0, axis: [0, 1, 0]))
-            redOrbitContainer.addChild(whiteOrbitContainer)
-
-            // サイズ0.5の白いキューブを作成
-            let whiteCubeMesh = MeshResource.generateBox(size: 0.5)
-            let whiteMaterial = SimpleMaterial(color: .white, isMetallic: false)
-            let whiteCubeEntity = ModelEntity(mesh: whiteCubeMesh, materials: [whiteMaterial])
-
-            // 白いキューブの傾き(y軸から5°傾き)
-            let whiteTiltAngle = Float(5.0 * .pi / 180.0)
-            let whiteTiltRotation = simd_quatf(angle: whiteTiltAngle, axis: SIMD3<Float>(1, 0, 0))
-            whiteCubeEntity.transform.rotation = whiteTiltRotation
-
-            // RotationComponentを追加（y軸方向で自転、周期1秒）
-            whiteCubeEntity.components.set(RotationComponent(axis: [0, 1, 0], period: 1.0))
-
-            whiteOrbitContainer.addChild(whiteCubeEntity)
+            let whiteCubeModel = CelestialBodyModel(
+                size: 0.5,
+                color: .white,
+                tiltAngleDegrees: 5.0,
+                rotationPeriod: 1.0,
+                orbitRadius: 2.0,
+                orbitPeriod: 2.0
+            )
+            _ = CelestialBodyFactory.addCelestialBody(
+                model: whiteCubeModel,
+                to: redOrbitContainer
+            )
         }
     }
 }
