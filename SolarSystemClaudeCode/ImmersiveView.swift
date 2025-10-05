@@ -31,6 +31,12 @@ struct ImmersiveView: View {
             let origin = Entity()
             content.add(origin)
 
+            // === 赤いキューブのセットアップ ===
+            // 公転用のContainer Entity
+            let redOrbitContainer = Entity()
+            redOrbitContainer.components.set(OrbitComponent(radius: 5.0, period: 10.0, axis: [0, 1, 0]))
+            origin.addChild(redOrbitContainer)
+
             // サイズ1.0の赤いキューブを作成
             let cubeMesh = MeshResource.generateBox(size: 1.0)
             let redMaterial = SimpleMaterial(color: .red, isMetallic: false)
@@ -41,36 +47,31 @@ struct ImmersiveView: View {
             let tiltRotation = simd_quatf(angle: tiltAngle, axis: SIMD3<Float>(1, 0, 0))
             cubeEntity.transform.rotation = tiltRotation
 
-            // OrbitComponentを追加（半径5m、周期5秒、Y軸まわり）
-            cubeEntity.components.set(OrbitComponent(radius: 5.0, period: 10.0, axis: [0, 1, 0]))
-
             // RotationComponentを追加（y軸方向で自転、周期1秒）
-            cubeEntity.components.set(RotationComponent(axis: [0, 1, 0], period: 5.0))
+            cubeEntity.components.set(RotationComponent(axis: [0, 1, 0], period: 1.0))
 
-            origin.addChild(cubeEntity)
+            redOrbitContainer.addChild(cubeEntity)
+
+            // === 白いキューブのセットアップ ===
+            // 公転用のContainer Entity
+            let whiteOrbitContainer = Entity()
+            whiteOrbitContainer.components.set(OrbitComponent(radius: 2.0, period: 2.0, axis: [0, 1, 0]))
+            redOrbitContainer.addChild(whiteOrbitContainer)
 
             // サイズ0.5の白いキューブを作成
             let whiteCubeMesh = MeshResource.generateBox(size: 0.5)
             let whiteMaterial = SimpleMaterial(color: .white, isMetallic: false)
             let whiteCubeEntity = ModelEntity(mesh: whiteCubeMesh, materials: [whiteMaterial])
 
-            // 親(赤いキューブ)の回転の逆回転を計算
-            let parentRotationInverse = cubeEntity.transform.rotation.inverse
+            // 白いキューブの傾き(y軸から5°傾き)
+            let whiteTiltAngle = Float(5.0 * .pi / 180.0)
+            let whiteTiltRotation = simd_quatf(angle: whiteTiltAngle, axis: SIMD3<Float>(1, 0, 0))
+            whiteCubeEntity.transform.rotation = whiteTiltRotation
 
-            // 白いキューブの目標回転(y軸から30°傾き)
-            let whiteTiltAngle = Float(-30.0 * .pi / 180.0)
-            let whiteTargetRotation = simd_quatf(angle: whiteTiltAngle, axis: SIMD3<Float>(1, 0, 0))
+            // RotationComponentを追加（y軸方向で自転、周期1秒）
+            whiteCubeEntity.components.set(RotationComponent(axis: [0, 1, 0], period: 1.0))
 
-            // 親の影響を相殺するために、逆回転と目標回転を合成
-            whiteCubeEntity.transform.rotation = parentRotationInverse * whiteTargetRotation
-
-            // OrbitComponentを追加（半径2.0m、周期1.0秒、Y軸まわり）
-            whiteCubeEntity.components.set(OrbitComponent(radius: 2.0, period: 10.0, axis: [0, 1, 0]))
-
-            // RotationComponentを追加（y軸方向で自転、周期1.0秒）
-            whiteCubeEntity.components.set(RotationComponent(axis: [0, 1, 0], period: 5.0))
-
-            cubeEntity.addChild(whiteCubeEntity)
+            whiteOrbitContainer.addChild(whiteCubeEntity)
         }
     }
 }
