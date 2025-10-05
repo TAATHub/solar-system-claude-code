@@ -26,32 +26,32 @@ struct ImmersiveView: View {
                 origin.addChild(sun)
             }
             
-            // === 赤いキューブのセットアップ ===
-            let redCubeModel = CelestialBodyModel(
-                size: 1.0,
-                color: .red,
-                tiltAngleDegrees: 30.0,
-                rotationPeriod: 1.0,
-                orbitRadius: 5.0,
-                orbitPeriod: 10.0
+            // === Earthのセットアップ ===
+            let earthModel = CelestialBodyModel(
+                modelName: "Earth",
+                size: 0.00918 * 100,            // 太陽の直径の約1/109
+                tiltAngleDegrees: 23.44,  // 地軸の傾き
+                rotationPeriod: 1.0,      // 1日で自転（視認性のため実時間スケール）
+                orbitRadius: 5.0,         // 視認性のため圧縮
+                orbitPeriod: 10.0         // 視認性のため圧縮
             )
-            let (redOrbitContainer, _) = CelestialBodyFactory.addCelestialBody(
-                model: redCubeModel,
+            guard let (earthOrbitContainer, _) = await CelestialBodyFactory.addCelestialBody(
+                model: earthModel,
                 to: origin
-            )
+            ) else { return }
 
-            // === 白いキューブのセットアップ ===
-            let whiteCubeModel = CelestialBodyModel(
-                size: 0.5,
-                color: .white,
-                tiltAngleDegrees: 5.0,
-                rotationPeriod: 1.0,
-                orbitRadius: 2.0,
-                orbitPeriod: 2.0
+            // === Moonのセットアップ ===
+            let moonModel = CelestialBodyModel(
+                modelName: "Moon",
+                size: 0.00250 * 100,            // 太陽の直径の約1/400
+                tiltAngleDegrees: 1.54,   // 月の自転軸傾き
+                rotationPeriod: 2.0,      // 潮汐ロック（公転周期と同じ）
+                orbitRadius: 2.0,         // 地球からの距離（視認性のため圧縮）
+                orbitPeriod: 2.0          // 約27日（視認性のため圧縮）
             )
-            _ = CelestialBodyFactory.addCelestialBody(
-                model: whiteCubeModel,
-                to: redOrbitContainer
+            _ = await CelestialBodyFactory.addCelestialBody(
+                model: moonModel,
+                to: earthOrbitContainer
             )
         }
     }

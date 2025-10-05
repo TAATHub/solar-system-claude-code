@@ -7,11 +7,12 @@
 
 import SwiftUI
 import RealityKit
+import RealityKitContent
 
 /// 天体のパラメータを保持するモデル
 struct CelestialBodyModel {
-    let size: Float
-    let color: UIColor
+    let modelName: String
+    let size: Float  // Sun = 1.0基準のサイズ
     let tiltAngle: Float // ラジアン
     let rotationAxis: SIMD3<Float>
     let rotationPeriod: Float
@@ -20,8 +21,8 @@ struct CelestialBodyModel {
     let orbitAxis: SIMD3<Float>
 
     init(
-        size: Float,
-        color: UIColor,
+        modelName: String,
+        size: Float = 1.0,
         tiltAngleDegrees: Float,
         rotationAxis: SIMD3<Float> = [0, 1, 0],
         rotationPeriod: Float,
@@ -29,8 +30,8 @@ struct CelestialBodyModel {
         orbitPeriod: Float? = nil,
         orbitAxis: SIMD3<Float> = [0, 1, 0]
     ) {
+        self.modelName = modelName
         self.size = size
-        self.color = color
         self.tiltAngle = tiltAngleDegrees * .pi / 180.0
         self.rotationAxis = rotationAxis
         self.rotationPeriod = rotationPeriod
@@ -43,44 +44,47 @@ struct CelestialBodyModel {
 /// 天体Entityを生成するファクトリークラス
 class CelestialBodyFactory {
 
-    /// 天体Entityを生成する
-    static func createCelestialBody(from model: CelestialBodyModel) -> ModelEntity {
-        let mesh = MeshResource.generateBox(size: model.size)
-        let material = SimpleMaterial(color: model.color, isMetallic: false)
-        let entity = ModelEntity(mesh: mesh, materials: [material])
-
-        // 傾きの設定
-        let tiltRotation = simd_quatf(angle: model.tiltAngle, axis: SIMD3<Float>(1, 0, 0))
-        entity.transform.rotation = tiltRotation
-
-        // 自転コンポーネントの追加
-        entity.components.set(RotationComponent(axis: model.rotationAxis, period: Double(model.rotationPeriod)))
-
-        return entity
-    }
-
-    /// 公転用コンテナEntityを生成する
-    static func createOrbitContainer(radius: Float, period: Float, axis: SIMD3<Float>) -> Entity {
-        let container = Entity()
-        container.components.set(OrbitComponent(radius: radius, period: Double(period), axis: axis))
-        return container
-    }
-
-    /// 天体とその公転コンテナを親に追加する
+    /// RealityKitバンドルから天体Entityを読み込んでセットアップする
     static func addCelestialBody(
         model: CelestialBodyModel,
         to parent: Entity
-    ) -> (container: Entity, body: ModelEntity) {
-        let body = createCelestialBody(from: model)
-
-        if let orbitRadius = model.orbitRadius, let orbitPeriod = model.orbitPeriod {
-            let container = createOrbitContainer(radius: orbitRadius, period: orbitPeriod, axis: model.orbitAxis)
-            parent.addChild(container)
-            container.addChild(body)
-            return (container, body)
-        } else {
-            parent.addChild(body)
-            return (parent, body)
+    ) async -> (orbitContainer: Entity, rotationContainer: Entity)? {
+        // RealityKitバンドルからモデルを読み込む
+        guard let celestialBody = try? await Entity(named: model.modelName, in: realityKitContentBundle) else {
+            print("Failed to load model: \(model.modelName)")
+            return nil
         }
+
+        // サイズを設定（Sun = 1.0基準）
+        celestialBody.scale = SIMD3<Float>(repeating: model.size)
+
+        // 公転用コンテナ
+        let orbitContainer = Entity()
+        parent.addChild(orbitContainer)
+
+        // 自転用コンテナ
+        let rotationContainer = Entity()
+        orbitContainer.addChild(rotationContainer)
+        rotationContainer.addChild(celestialBody)
+
+        // 自転軸の傾きを設定
+        rotationContainer.orientation = simd_quatf(angle: model.tiltAngle, axis: [0, 0, 1])
+
+        // 公転コンポーネント
+        if let orbitRadius = model.orbitRadius, let orbitPeriod = model.orbitPeriod {
+            orbitContainer.components[OrbitComponent.self] = OrbitComponent(
+                radius: orbitRadius,
+                period: Double(orbitPeriod),
+                axis: model.orbitAxis
+            )
+        }
+
+        // 自転コンポーネント
+        rotationContainer.components[RotationComponent.self] = RotationComponent(
+            axis: model.rotationAxis,
+            period: Double(model.rotationPeriod)
+        )
+
+        return (orbitContainer, rotationContainer)
     }
 }
