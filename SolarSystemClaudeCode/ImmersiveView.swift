@@ -18,19 +18,14 @@ struct ImmersiveView: View {
 
     var body: some View {
         RealityView { content in
-
-            // Add the initial RealityKit content
-            if let immersiveContentEntity = try? await Entity(named: "Immersive", in: realityKitContentBundle) {
-                content.add(immersiveContentEntity)
-
-                // Put skybox here.  See example in World project available at
-                // https://developer.apple.com/
-            }
-
             // 原点に基準エンティティを配置
             let origin = Entity()
             content.add(origin)
 
+            if let sun = try? await Entity(named: "Sun", in: realityKitContentBundle) {
+                origin.addChild(sun)
+            }
+            
             // === 赤いキューブのセットアップ ===
             let redCubeModel = CelestialBodyModel(
                 size: 1.0,
