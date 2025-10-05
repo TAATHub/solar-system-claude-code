@@ -29,7 +29,7 @@ struct ImmersiveView: View {
             // === Earthのセットアップ ===
             let earthModel = CelestialBodyModel(
                 modelName: "Earth",
-                size: 0.00918 * 100,            // 太陽の直径の約1/109
+                size: 0.3,                // 視認性を重視したサイズ
                 tiltAngleDegrees: 23.44,  // 地軸の傾き
                 rotationPeriod: 1.0,      // 1日で自転（視認性のため実時間スケール）
                 orbitRadius: 5.0,         // 視認性のため圧縮
@@ -43,7 +43,7 @@ struct ImmersiveView: View {
             // === Moonのセットアップ ===
             let moonModel = CelestialBodyModel(
                 modelName: "Moon",
-                size: 0.00250 * 100,            // 太陽の直径の約1/400
+                size: 0.1,                // 視認性を重視したサイズ(Earthの約1/3)
                 tiltAngleDegrees: 1.54,   // 月の自転軸傾き
                 rotationPeriod: 2.0,      // 潮汐ロック（公転周期と同じ）
                 orbitRadius: 2.0,         // 地球からの距離（視認性のため圧縮）
