@@ -14,7 +14,7 @@ def Xform "Root"
     )
     {
         rel material:binding = </Root/Sphere/DefaultMaterial>
-        double radius = 0.1
+        double radius = 1
 
         def Material "DefaultMaterial"
         {
