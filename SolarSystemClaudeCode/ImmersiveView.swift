@@ -22,10 +22,17 @@ struct ImmersiveView: View {
             let origin = Entity()
             content.add(origin)
 
-            if let sun = try? await Entity(named: "Sun", in: realityKitContentBundle) {
+            // SolarSystemシーンを読み込む
+            guard let solarSystemScene = try? await Entity(named: "SolarSystem", in: realityKitContentBundle) else {
+                print("SolarSystemシーンの読み込みに失敗しました")
+                return
+            }
+
+            // Sunを取得して追加
+            if let sun = solarSystemScene.findEntity(named: "Sun") {
                 origin.addChild(sun)
             }
-            
+
             // === Earthのセットアップ ===
             let earthModel = CelestialBodyModel(
                 modelName: "Earth",
@@ -37,7 +44,8 @@ struct ImmersiveView: View {
             )
             guard let (earthOrbitContainer, _) = await CelestialBodyFactory.addCelestialBody(
                 model: earthModel,
-                to: origin
+                to: origin,
+                fromScene: solarSystemScene
             ) else { return }
 
             // === Moonのセットアップ ===
@@ -51,7 +59,8 @@ struct ImmersiveView: View {
             )
             _ = await CelestialBodyFactory.addCelestialBody(
                 model: moonModel,
-                to: earthOrbitContainer
+                to: earthOrbitContainer,
+                fromScene: solarSystemScene
             )
         }
     }

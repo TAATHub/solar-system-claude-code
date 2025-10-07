@@ -6,13 +6,23 @@
     "\/RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/Scene.usda" : "0A9B4653-B11E-4D6A-850E-C6FCB621626C",
     "\/RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/Untitled Scene.usda" : "D560BB77-AAF3-4BDE-B7C4-989332A4688B",
     "\/RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/Untitled%20Scene.usda" : "D37A80D1-46CF-464C-9E4E-93739D5E723E",
+    "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/Earth.usda" : "AA3E297A-1DAE-41C1-9496-F06F4606CE52",
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/GridMaterial.usda" : "66168B71-AB05-424E-8B6C-D33D6E61B08F",
     "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/Immersive.usda" : "AF09ED6F-1707-48FD-8720-65B998362C09",
-    "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/Scene.usda" : "D66134B1-3681-4A8E-AFE5-29F257229F3B"
+    "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/Moon.usda" : "47603277-CB09-49EF-BF4C-0BBF316E534D",
+    "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/Scene.usda" : "D66134B1-3681-4A8E-AFE5-29F257229F3B",
+    "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/SolarSystem.usdc" : "4007DB5C-1BD4-4100-A2D8-2E0EBFD4A081",
+    "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/SolarSystem2.usdc" : "1660FAF0-BEE2-4AF1-BE73-4C56EB16798A",
+    "RealityKitContent\/Sources\/RealityKitContent\/RealityKitContent.rkassets\/Sun.usda" : "9ED51C94-F794-423E-9A1D-2F27D927A0B4"
   },
   "projectID" : 5588393070668993340,
   "uuidToIntID" : {
+    "1660FAF0-BEE2-4AF1-BE73-4C56EB16798A" : 2780032971116538521,
     "17C2EC7C-4A95-453C-9029-AFF839CDFF55" : -6980876326484678594,
+    "4007DB5C-1BD4-4100-A2D8-2E0EBFD4A081" : -6050075995178212462,
+    "47603277-CB09-49EF-BF4C-0BBF316E534D" : -623204241572935413,
+    "9ED51C94-F794-423E-9A1D-2F27D927A0B4" : 8259829985482606917,
+    "AA3E297A-1DAE-41C1-9496-F06F4606CE52" : 1653780802795610136,
     "AF09ED6F-1707-48FD-8720-65B998362C09" : 8374158156561668556,
     "D37A80D1-46CF-464C-9E4E-93739D5E723E" : -8045936516143697317,
     "D66134B1-3681-4A8E-AFE5-29F257229F3B" : -5438643430787551264

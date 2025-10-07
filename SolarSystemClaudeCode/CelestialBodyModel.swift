@@ -44,16 +44,20 @@ struct CelestialBodyModel {
 /// 天体Entityを生成するファクトリークラス
 class CelestialBodyFactory {
 
-    /// RealityKitバンドルから天体Entityを読み込んでセットアップする
+    /// SolarSystemシーンから天体Entityを取得してセットアップする
     static func addCelestialBody(
         model: CelestialBodyModel,
-        to parent: Entity
+        to parent: Entity,
+        fromScene scene: Entity
     ) async -> (orbitContainer: Entity, rotationContainer: Entity)? {
-        // RealityKitバンドルからモデルを読み込む
-        guard let celestialBody = try? await Entity(named: model.modelName, in: realityKitContentBundle) else {
-            print("Failed to load model: \(model.modelName)")
+        // SolarSystemシーンから指定されたEntityを検索
+        guard let celestialBody = scene.findEntity(named: model.modelName) else {
+            print("Failed to find entity: \(model.modelName)")
             return nil
         }
+
+        // Reality Composer Proで配置時のオフセットをリセット
+        celestialBody.position = .zero
 
         // サイズを設定（Sun = 1.0基準）
         celestialBody.scale = SIMD3<Float>(repeating: model.size)
