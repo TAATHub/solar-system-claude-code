@@ -24,6 +24,9 @@ struct ImmersiveView: View {
             let origin = Entity()
             content.add(origin)
 
+            origin.position = [0, 1, 0]
+            origin.scale *= 0.1
+
             // SolarSystemシーンを読み込む
             guard let solarSystemScene = try? await Entity(named: "SolarSystem", in: realityKitContentBundle) else {
                 print("SolarSystemシーンの読み込みに失敗しました")
