@@ -20,6 +20,7 @@ struct CelestialBodyModel {
     let orbitPeriod: Float?
     let orbitAxis: SIMD3<Float>
     let description: String
+    let collisionRadius: Float // タッチ判定用の半径
 
     init(
         modelName: String,
@@ -30,7 +31,8 @@ struct CelestialBodyModel {
         orbitRadius: Float? = nil,
         orbitPeriod: Float? = nil,
         orbitAxis: SIMD3<Float> = [0, 1, 0],
-        description: String = ""
+        description: String = "",
+        collisionRadius: Float? = nil
     ) {
         self.modelName = modelName
         self.size = size
@@ -41,6 +43,7 @@ struct CelestialBodyModel {
         self.orbitPeriod = orbitPeriod
         self.orbitAxis = orbitAxis
         self.description = description
+        self.collisionRadius = collisionRadius ?? size * 1.5 // デフォルトはsizeと同じ
     }
 }
 
@@ -105,10 +108,9 @@ class CelestialBodyFactory {
         celestialBody.components[InputTargetComponent.self] = InputTargetComponent()
 
         // コリジョンシェイプを追加（タッチ判定用）
-        let bounds = celestialBody.visualBounds(relativeTo: nil)
-        let radius = max(bounds.extents.x, max(bounds.extents.y, bounds.extents.z)) / 2
+        // 天体データから定義されたcollisionRadiusを使用
         celestialBody.components[CollisionComponent.self] = CollisionComponent(
-            shapes: [.generateSphere(radius: radius)]
+            shapes: [.generateSphere(radius: model.collisionRadius)]
         )
 
         return (orbitContainer, rotationContainer)
