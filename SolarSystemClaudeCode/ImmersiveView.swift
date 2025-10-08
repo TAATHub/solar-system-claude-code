@@ -30,14 +30,13 @@ struct ImmersiveView: View {
                 return
             }
 
-            // Sunを取得して追加
-            if let sun = solarSystemScene.findEntity(named: "Sun") {
-                // Up AxisをZからYに変換
-                sun.applyZUpToYUpConversion()
-                origin.addChild(sun)
-            }
-
             // === 天体のセットアップ ===
+            // Sun
+            _ = await CelestialBodyFactory.addCelestialBody(
+                model: CelestialBodyData.sun,
+                to: origin,
+                fromScene: solarSystemScene
+            )
             // Mercury
             _ = await CelestialBodyFactory.addCelestialBody(
                 model: CelestialBodyData.mercury,

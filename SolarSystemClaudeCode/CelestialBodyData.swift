@@ -9,6 +9,17 @@ import Foundation
 
 /// 太陽系の天体データ定義
 struct CelestialBodyData {
+    /// 太陽のモデルデータ
+    static let sun = CelestialBodyModel(
+        modelName: "Sun",
+        size: 1.0,                // 太陽の視認サイズ
+        tiltAngleDegrees: 7.25,   // 太陽の自転軸傾き
+        rotationPeriod: 2.0,      // 視認性のため圧縮
+        orbitRadius: 0.0,         // 太陽は公転しない
+        orbitPeriod: 0.0,         // 太陽は公転しない
+        description: "太陽系の中心にある恒星。全ての惑星に光と熱を与えている。"
+    )
+
     /// 地球のモデルデータ
     static let earth = CelestialBodyModel(
         modelName: "Earth",
