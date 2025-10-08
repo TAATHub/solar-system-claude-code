@@ -10,6 +10,8 @@ import RealityKit
 import RealityKitContent
 
 struct ImmersiveView: View {
+    @Environment(AppModel.self) private var appModel
+
     init() {
         // Systemの登録は一度だけ実行されるようにinitで行う
         OrbitSystem.registerSystem()
@@ -99,6 +101,17 @@ struct ImmersiveView: View {
                 fromScene: solarSystemScene
             )
         }
+        .gesture(
+            SpatialTapGesture()
+                .targetedToAnyEntity()
+                .onEnded { value in
+                    // タップされたEntityから天体情報を取得
+                    if let info = value.entity.components[CelestialBodyInfoComponent.self] {
+                        appModel.selectedCelestialBodyName = info.name
+                        appModel.selectedCelestialBodyDescription = info.description
+                    }
+                }
+        )
     }
 }
 

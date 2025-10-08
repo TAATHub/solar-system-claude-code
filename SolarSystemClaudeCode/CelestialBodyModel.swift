@@ -19,6 +19,7 @@ struct CelestialBodyModel {
     let orbitRadius: Float?
     let orbitPeriod: Float?
     let orbitAxis: SIMD3<Float>
+    let description: String
 
     init(
         modelName: String,
@@ -28,7 +29,8 @@ struct CelestialBodyModel {
         rotationPeriod: Float,
         orbitRadius: Float? = nil,
         orbitPeriod: Float? = nil,
-        orbitAxis: SIMD3<Float> = [0, 1, 0]
+        orbitAxis: SIMD3<Float> = [0, 1, 0],
+        description: String = ""
     ) {
         self.modelName = modelName
         self.size = size
@@ -38,6 +40,7 @@ struct CelestialBodyModel {
         self.orbitRadius = orbitRadius
         self.orbitPeriod = orbitPeriod
         self.orbitAxis = orbitAxis
+        self.description = description
     }
 }
 
@@ -90,6 +93,22 @@ class CelestialBodyFactory {
         rotationContainer.components[RotationComponent.self] = RotationComponent(
             axis: model.rotationAxis,
             period: Double(model.rotationPeriod)
+        )
+
+        // 天体情報コンポーネント
+        celestialBody.components[CelestialBodyInfoComponent.self] = CelestialBodyInfoComponent(
+            name: model.modelName,
+            description: model.description
+        )
+
+        // 入力ターゲットコンポーネント（タッチを可能にする）
+        celestialBody.components[InputTargetComponent.self] = InputTargetComponent()
+
+        // コリジョンシェイプを追加（タッチ判定用）
+        let bounds = celestialBody.visualBounds(relativeTo: nil)
+        let radius = max(bounds.extents.x, max(bounds.extents.y, bounds.extents.z)) / 2
+        celestialBody.components[CollisionComponent.self] = CollisionComponent(
+            shapes: [.generateSphere(radius: radius)]
         )
 
         return (orbitContainer, rotationContainer)

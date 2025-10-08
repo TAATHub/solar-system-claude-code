@@ -18,4 +18,8 @@ class AppModel {
         case open
     }
     var immersiveSpaceState = ImmersiveSpaceState.closed
+
+    /// 選択された天体の情報
+    var selectedCelestialBodyName: String?
+    var selectedCelestialBodyDescription: String?
 }
