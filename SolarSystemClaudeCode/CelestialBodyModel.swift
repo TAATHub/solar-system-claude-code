@@ -43,7 +43,7 @@ struct CelestialBodyModel {
         self.orbitPeriod = orbitPeriod
         self.orbitAxis = orbitAxis
         self.description = description
-        self.collisionRadius = collisionRadius ?? size * 1.5 // デフォルトはsizeと同じ
+        self.collisionRadius = collisionRadius ?? 1.5 // 天体に対して相対的に1.5倍
     }
 }
 
