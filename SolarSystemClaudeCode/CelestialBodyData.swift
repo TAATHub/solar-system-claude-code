@@ -22,10 +22,10 @@ struct CelestialBodyData {
     /// 月のモデルデータ
     static let moon = CelestialBodyModel(
         modelName: "Moon",
-        size: 0.1,                // 視認性を重視したサイズ(Earthの約1/3)
+        size: 0.08,               // 視認性を重視したサイズ(Earthの約1/4)
         tiltAngleDegrees: 1.54,   // 月の自転軸傾き
         rotationPeriod: 2.0,      // 潮汐ロック（公転周期と同じ）
-        orbitRadius: 2.0,         // 地球からの距離（視認性のため圧縮）
+        orbitRadius: 0.5,         // 地球からの距離（視認性重視で圧縮）
         orbitPeriod: 2.0          // 約27日（視認性のため圧縮）
     )
 
