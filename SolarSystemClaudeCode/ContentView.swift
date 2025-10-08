@@ -13,13 +13,13 @@ struct ContentView: View {
     @Environment(AppModel.self) private var appModel
 
     var body: some View {
-        VStack {
+        VStack(spacing: 40) {
             Model3D(named: "Scene", bundle: realityKitContentBundle)
                 .padding(.bottom, 50)
 
             if let name = appModel.selectedCelestialBodyName,
                let description = appModel.selectedCelestialBodyDescription {
-                VStack(spacing: 10) {
+                VStack(spacing: 16) {
                     Text(name)
                         .font(.title)
                         .bold()
@@ -28,12 +28,13 @@ struct ContentView: View {
                 }
                 .padding()
                 .background(.regularMaterial)
-                .cornerRadius(12)
+                .cornerRadius(8)
             }
 
             ToggleImmersiveSpaceButton()
         }
         .padding()
+        .frame(width: 640, height: 640)
     }
 }
 
