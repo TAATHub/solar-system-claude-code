@@ -62,8 +62,8 @@ class CelestialBodyFactory {
         // サイズを設定（Sun = 1.0基準）
         celestialBody.scale = SIMD3<Float>(repeating: model.size)
 
-        // Up AxisをZからYに変換（-90度X軸回転）
-        celestialBody.transform.rotation = simd_quatf(angle: -.pi / 2, axis: [1, 0, 0])
+        // Up AxisをZからYに変換
+        celestialBody.applyZUpToYUpConversion()
 
         // 公転用コンテナ
         let orbitContainer = Entity()
