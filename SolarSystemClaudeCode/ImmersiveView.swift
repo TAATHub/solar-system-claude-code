@@ -30,6 +30,8 @@ struct ImmersiveView: View {
 
             // Sunを取得して追加
             if let sun = solarSystemScene.findEntity(named: "Sun") {
+                // Up AxisをZからYに変換（-90度X軸回転）
+                sun.transform.rotation = simd_quatf(angle: -.pi / 2, axis: [1, 0, 0])
                 origin.addChild(sun)
             }
 
