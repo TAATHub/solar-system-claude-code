@@ -1,15 +1,14 @@
 //
-//  ImmersiveView.swift
+//  VolumeView.swift
 //  SolarSystemClaudeCode
 //
-//  Created by TAAT on 2025/10/03.
+//  Volume表示用のView
 //
 
 import SwiftUI
 import RealityKit
-import RealityKitContent
 
-struct ImmersiveView: View {
+struct VolumeView: View {
     @Environment(AppModel.self) private var appModel
 
     init() {
@@ -17,15 +16,15 @@ struct ImmersiveView: View {
         OrbitSystem.registerSystem()
         RotationSystem.registerSystem()
     }
-
+    
     var body: some View {
         RealityView { content in
             await SolarSystemBuilder.build(
                 in: content,
-                scale: 0.05,
-                position: [0, 1, 0],
-                includeSkybox: true,
-                includeBGM: true
+                scale: 0.01,
+                position: [0, -0.3, 0],
+                includeSkybox: false,
+                includeBGM: false
             )
         }
         .gesture(
@@ -42,7 +41,7 @@ struct ImmersiveView: View {
     }
 }
 
-#Preview(immersionStyle: .mixed) {
-    ImmersiveView()
+#Preview {
+    VolumeView()
         .environment(AppModel())
 }

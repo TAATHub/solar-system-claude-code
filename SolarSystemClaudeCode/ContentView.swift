@@ -11,6 +11,7 @@ import RealityKitContent
 
 struct ContentView: View {
     @Environment(AppModel.self) private var appModel
+    @Environment(\.openWindow) private var openWindow
 
     var body: some View {
         VStack(spacing: 40) {
@@ -32,6 +33,10 @@ struct ContentView: View {
             }
 
             ToggleImmersiveSpaceButton()
+
+            Button("Open Volume") {
+                openWindow(id: "SolarSystemVolume")
+            }
         }
         .padding()
         .frame(width: 640, height: 640)

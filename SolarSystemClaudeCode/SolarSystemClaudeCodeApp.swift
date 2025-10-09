@@ -30,5 +30,12 @@ struct SolarSystemClaudeCodeApp: App {
                 }
         }
         .immersionStyle(selection: .constant(.mixed), in: .mixed)
+
+        WindowGroup(id: "SolarSystemVolume") {
+            VolumeView()
+                .environment(appModel)
+        }
+        .windowStyle(.volumetric)
+        .defaultSize(width: 1.0, height: 1.0, depth: 1.0, in: .meters)
      }
 }
