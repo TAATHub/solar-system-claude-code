@@ -10,7 +10,7 @@
 
 ## コーディングガイドライン
 
-@.claude/RealityKitDevelopmentRules.md
+@.claude/RealityKit_ECS_Guide.md
 @.claude/visionOSWindowManagement.md
 
 ## ビルド&実行
