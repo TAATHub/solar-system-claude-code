@@ -64,8 +64,14 @@ struct VolumeView: View {
                 .onEnded { value in
                     // タップされたEntityから天体情報を取得
                     if let info = value.entity.components[CelestialBodyInfoComponent.self] {
-                        appModel.selectedCelestialBodyName = info.name
-                        appModel.selectedCelestialBodyDescription = info.description
+                        // 同じ天体をタップした場合は非表示にする
+                        if appModel.selectedCelestialBodyName == info.name {
+                            appModel.selectedCelestialBodyName = nil
+                            appModel.selectedCelestialBodyDescription = nil
+                        } else {
+                            appModel.selectedCelestialBodyName = info.name
+                            appModel.selectedCelestialBodyDescription = info.description
+                        }
                     }
                 }
         )
