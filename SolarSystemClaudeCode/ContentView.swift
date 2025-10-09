@@ -15,13 +15,22 @@ struct ContentView: View {
 
     var body: some View {
         VStack(spacing: 40) {
-            Model3D(named: "Scene", bundle: realityKitContentBundle)
-                .padding(.bottom, 50)
+            Text("Solar System")
+                .font(.largeTitle)
+                .bold()
 
-            ToggleImmersiveSpaceButton()
+            Text("没入空間で宇宙の広がりを感じたり、\nボリュームで手元に置いたり。\nあなたの好きなスタイルで太陽系シミュレーションを楽しめます。\n気になる天体をタッチすれば、詳しい説明も見られます。")
+                .font(.body)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
 
-            Button("Open Volume") {
-                openWindow(id: "SolarSystemVolume")
+            VStack(spacing: 16) {   
+                ToggleImmersiveSpaceButton()
+                
+                Button("Show Volume") {
+                    openWindow(id: "SolarSystemVolume")
+                }
+                .disabled(appModel.immersiveSpaceState != .closed)
             }
         }
         .padding()
