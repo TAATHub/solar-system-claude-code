@@ -10,6 +10,8 @@ import RealityKit
 
 struct VolumeView: View {
     @Environment(AppModel.self) private var appModel
+    @State private var selectedCelestialBodyName: String?
+    @State private var selectedCelestialBodyDescription: String?
 
     init() {
         // Systemの登録は一度だけ実行されるようにinitで行う
@@ -34,15 +36,15 @@ struct VolumeView: View {
             }
 
             // 選択された天体がある場合、新しいパネルを追加
-            if appModel.selectedCelestialBodyName != nil,
+            if selectedCelestialBodyName != nil,
                let attachmentEntity = attachments.entity(for: "info") {
                 attachmentEntity.name = "InfoPanel"
                 attachmentEntity.position = [0, 0, 0]
                 content.add(attachmentEntity)
             }
         } attachments: {
-            if let name = appModel.selectedCelestialBodyName,
-               let description = appModel.selectedCelestialBodyDescription {
+            if let name = selectedCelestialBodyName,
+               let description = selectedCelestialBodyDescription {
                 Attachment(id: "info") {
                     VStack(spacing: 8) {
                         Text(name)
@@ -65,12 +67,12 @@ struct VolumeView: View {
                     // タップされたEntityから天体情報を取得
                     if let info = value.entity.components[CelestialBodyInfoComponent.self] {
                         // 同じ天体をタップした場合は非表示にする
-                        if appModel.selectedCelestialBodyName == info.name {
-                            appModel.selectedCelestialBodyName = nil
-                            appModel.selectedCelestialBodyDescription = nil
+                        if selectedCelestialBodyName == info.name {
+                            selectedCelestialBodyName = nil
+                            selectedCelestialBodyDescription = nil
                         } else {
-                            appModel.selectedCelestialBodyName = info.name
-                            appModel.selectedCelestialBodyDescription = info.description
+                            selectedCelestialBodyName = info.name
+                            selectedCelestialBodyDescription = info.description
                         }
                     }
                 }

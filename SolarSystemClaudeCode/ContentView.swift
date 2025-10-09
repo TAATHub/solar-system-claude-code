@@ -18,20 +18,6 @@ struct ContentView: View {
             Model3D(named: "Scene", bundle: realityKitContentBundle)
                 .padding(.bottom, 50)
 
-            if let name = appModel.selectedCelestialBodyName,
-               let description = appModel.selectedCelestialBodyDescription {
-                VStack(spacing: 16) {
-                    Text(name)
-                        .font(.title)
-                        .bold()
-                    Text(description)
-                        .font(.body)
-                }
-                .padding()
-                .background(.regularMaterial)
-                .cornerRadius(8)
-            }
-
             ToggleImmersiveSpaceButton()
 
             Button("Open Volume") {
