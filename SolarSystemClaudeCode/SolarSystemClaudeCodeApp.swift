@@ -34,9 +34,11 @@ struct SolarSystemClaudeCodeApp: App {
         WindowGroup(id: "SolarSystemVolume") {
             VolumeView()
                 .environment(appModel)
+                .frame(width: 600, height: 600)
+                .frame(depth: 600)
         }
         .windowStyle(.volumetric)
+        .windowResizability(.contentSize)
         .volumeWorldAlignment(.gravityAligned)
-        .defaultSize(width: 0.4, height: 0.4, depth: 0.4, in: .meters)
      }
 }

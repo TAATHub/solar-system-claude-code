@@ -22,7 +22,7 @@ struct ImmersiveView: View {
         RealityView { content in
             await SolarSystemBuilder.build(
                 in: content,
-                scale: 0.05,
+                scale: 0.1,
                 position: [0, 1, 0],
                 includeSkybox: true,
                 includeBGM: true

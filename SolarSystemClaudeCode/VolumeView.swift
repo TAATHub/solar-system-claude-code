@@ -22,7 +22,7 @@ struct VolumeView: View {
             await SolarSystemBuilder.build(
                 in: content,
                 scale: 0.01,
-                position: [0, 0, 0],
+                position: [0, -0.16, 0],
                 includeSkybox: false,
                 includeBGM: false
             )
