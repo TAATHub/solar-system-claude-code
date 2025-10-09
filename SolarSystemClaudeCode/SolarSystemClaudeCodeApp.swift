@@ -29,13 +29,14 @@ struct SolarSystemClaudeCodeApp: App {
                     appModel.immersiveSpaceState = .closed
                 }
         }
-        .immersionStyle(selection: .constant(.mixed), in: .mixed)
+        .immersionStyle(selection: .constant(.full), in: .full)
 
         WindowGroup(id: "SolarSystemVolume") {
             VolumeView()
                 .environment(appModel)
         }
         .windowStyle(.volumetric)
-        .defaultSize(width: 1.0, height: 1.0, depth: 1.0, in: .meters)
+        .volumeWorldAlignment(.gravityAligned)
+        .defaultSize(width: 0.4, height: 0.4, depth: 0.4, in: .meters)
      }
 }
