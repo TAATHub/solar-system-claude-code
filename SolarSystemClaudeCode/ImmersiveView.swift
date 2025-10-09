@@ -102,6 +102,21 @@ struct ImmersiveView: View {
                 to: origin,
                 fromScene: solarSystemScene
             )
+
+            // BGMの設定
+            do {
+                let audioResource = try await AudioFileResource(
+                    named: "BGM.mp3",
+                    configuration: .init(shouldLoop: true)
+                )
+                let bgmEntity = Entity()
+                bgmEntity.components[AmbientAudioComponent.self] = AmbientAudioComponent()
+                content.add(bgmEntity)
+
+                bgmEntity.prepareAudio(audioResource).play()
+            } catch {
+                print("BGMの読み込みに失敗しました: \(error)")
+            }
         }
         .gesture(
             SpatialTapGesture()
