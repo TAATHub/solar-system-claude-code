@@ -20,6 +20,11 @@ struct ImmersiveView: View {
 
     var body: some View {
         RealityView { content in
+            // Skyboxの設定
+            if let skybox = await Entity.createSkybox(textureName: "MilkyWay") {
+                content.add(skybox)
+            }
+
             // 原点に基準エンティティを配置
             let origin = Entity()
             content.add(origin)
