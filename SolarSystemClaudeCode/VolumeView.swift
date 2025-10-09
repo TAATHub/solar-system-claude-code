@@ -16,16 +16,47 @@ struct VolumeView: View {
         OrbitSystem.registerSystem()
         RotationSystem.registerSystem()
     }
-    
+
     var body: some View {
-        RealityView { content in
+        RealityView { content, attachments in
             await SolarSystemBuilder.build(
                 in: content,
                 scale: 0.01,
-                position: [0, -0.16, 0],
+                position: [0, -0.15, 0],
                 includeSkybox: false,
                 includeBGM: false
             )
+        } update: { content, attachments in
+            // Attachment用のEntityを探す
+            if let infoPanel = content.entities.first(where: { $0.name == "InfoPanel" }) {
+                // 既存のパネルを削除
+                infoPanel.removeFromParent()
+            }
+
+            // 選択された天体がある場合、新しいパネルを追加
+            if appModel.selectedCelestialBodyName != nil,
+               let attachmentEntity = attachments.entity(for: "info") {
+                attachmentEntity.name = "InfoPanel"
+                attachmentEntity.position = [0, 0, 0]
+                content.add(attachmentEntity)
+            }
+        } attachments: {
+            if let name = appModel.selectedCelestialBodyName,
+               let description = appModel.selectedCelestialBodyDescription {
+                Attachment(id: "info") {
+                    VStack(spacing: 8) {
+                        Text(name)
+                            .font(.callout)
+                            .bold()
+                        Text(description)
+                            .font(.caption)
+                    }
+                    .padding()
+                    .background(.ultraThinMaterial)
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                    .frame(maxWidth: 360)
+                }
+            }
         }
         .gesture(
             SpatialTapGesture()
