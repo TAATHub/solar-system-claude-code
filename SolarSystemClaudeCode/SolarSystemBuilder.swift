@@ -121,7 +121,11 @@ struct SolarSystemBuilder {
                     configuration: .init(shouldLoop: true)
                 )
                 let bgmEntity = Entity()
-                bgmEntity.components[AmbientAudioComponent.self] = AmbientAudioComponent()
+                
+                var component = AmbientAudioComponent()
+                component.gain = 0.1
+                
+                bgmEntity.components.set(component)
                 content.add(bgmEntity)
 
                 bgmEntity.prepareAudio(audioResource).play()
