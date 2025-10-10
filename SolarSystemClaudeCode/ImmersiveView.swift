@@ -24,7 +24,7 @@ struct ImmersiveView: View {
         RealityView { content, attachments in
             await SolarSystemBuilder.build(
                 in: content,
-                scale: 0.1,
+                scale: 0.2,
                 position: [0, 1, 0],
                 includeSkybox: true,
                 includeBGM: true
@@ -40,7 +40,8 @@ struct ImmersiveView: View {
             if selectedCelestialBodyName != nil,
                let attachmentEntity = attachments.entity(for: "info") {
                 attachmentEntity.name = "InfoPanel"
-                attachmentEntity.position = [0, 1.2, 0]
+                attachmentEntity.position = [0, 1.5, 0]
+                attachmentEntity.components.set(BillboardComponent())
                 content.add(attachmentEntity)
             }
         } attachments: {

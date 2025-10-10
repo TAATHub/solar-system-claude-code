@@ -40,6 +40,7 @@ struct VolumeView: View {
                let attachmentEntity = attachments.entity(for: "info") {
                 attachmentEntity.name = "InfoPanel"
                 attachmentEntity.position = [0, 0, 0]
+                attachmentEntity.components.set(BillboardComponent())
                 content.add(attachmentEntity)
             }
         } attachments: {

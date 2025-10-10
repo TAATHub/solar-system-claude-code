@@ -31,7 +31,7 @@ struct SolarSystemClaudeCodeApp: App {
         }
         .immersionStyle(selection: .constant(.full), in: .full)
         
-        Window(Text("Volume"), id: "SolarSystemVolume") {
+        WindowGroup(id: "SolarSystemVolume") {
             VolumeView()
                 .environment(appModel)
                 .frame(width: 600, height: 600)
