@@ -12,6 +12,7 @@
 ## コーディングガイドライン
 
 @.claude/RealityKit_ECS_Guide.md
+@.claude/RealityKit_AttachmentComponent_Guide.md
 @.claude/visionOSWindowManagement.md
 
 ## レビュー
