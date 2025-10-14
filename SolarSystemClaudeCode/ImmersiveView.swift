@@ -21,7 +21,7 @@ struct ImmersiveView: View {
     }
 
     var body: some View {
-        RealityView { content, attachments in
+        RealityView { content in
             await SolarSystemBuilder.build(
                 in: content,
                 scale: 0.2,
@@ -29,38 +29,40 @@ struct ImmersiveView: View {
                 includeSkybox: true,
                 includeBGM: true
             )
-        } update: { content, attachments in
-            // Attachment用のEntityを探す
+        } update: { content in
+            // 既存のInfoPanelを削除
             if let infoPanel = content.entities.first(where: { $0.name == "InfoPanel" }) {
-                // 既存のパネルを削除
                 infoPanel.removeFromParent()
             }
 
-            // 選択された天体がある場合、新しいパネルを追加
-            if selectedCelestialBodyName != nil,
-               let attachmentEntity = attachments.entity(for: "info") {
-                attachmentEntity.name = "InfoPanel"
-                attachmentEntity.position = [0, 1.5, 0]
-                attachmentEntity.components.set(BillboardComponent())
-                content.add(attachmentEntity)
+            // 選択された天体がある場合のみ、新しいパネルを作成
+            guard let name = selectedCelestialBodyName,
+                  let description = selectedCelestialBodyDescription else {
+                return
             }
-        } attachments: {
-            if let name = selectedCelestialBodyName,
-               let description = selectedCelestialBodyDescription {
-                Attachment(id: "info") {
-                    VStack(spacing: 8) {
-                        Text(name)
-                            .font(.callout)
-                            .bold()
-                        Text(description)
-                            .font(.caption)
-                    }
-                    .padding()
-                    .background(.ultraThinMaterial)
-                    .clipShape(RoundedRectangle(cornerRadius: 16))
-                    .frame(maxWidth: 360)
-                }
+
+            let infoPanelEntity = Entity()
+            infoPanelEntity.name = "InfoPanel"
+            infoPanelEntity.position = [0, 1.5, 0]
+
+            // ViewAttachmentComponentを使用してSwiftUIビューをアタッチ
+            let infoView = VStack(spacing: 8) {
+                Text(name)
+                    .font(.callout)
+                    .bold()
+                Text(description)
+                    .font(.caption)
             }
+            .padding()
+            .background(.ultraThinMaterial)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .frame(width: 360, height: 180)
+
+            let attachment = ViewAttachmentComponent(rootView: infoView)
+            infoPanelEntity.components.set(attachment)
+            infoPanelEntity.components.set(BillboardComponent())
+
+            content.add(infoPanelEntity)
         }
         .gesture(
             SpatialTapGesture()
