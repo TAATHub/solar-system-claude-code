@@ -86,7 +86,7 @@ RealityView { content in
 - コード量は若干増加しましたが、より明示的で理解しやすい実装になりました
 
 ## 関連ファイル
-- /Users/taat/git/SolarSystemClaudeCode/SolarSystemClaudeCode/ImmersiveView.swift
+- /Users/YourUserName/git/SolarSystemClaudeCode/SolarSystemClaudeCode/ImmersiveView.swift
 
 ## 参照ガイドライン
 - .claude/RealityKit_AttachmentComponent_Guide.md

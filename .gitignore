@@ -51,3 +51,8 @@ fastlane/test_output
 
 # macOS files
 Icon?
+
+# Claude Code settings
+.claude/settings.local.json
+.claude/.DS_Store
+.claude/tmp/

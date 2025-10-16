@@ -39,7 +39,7 @@ ImmersiveViewやVolumeViewでは、それぞれの中でAttachmentで天体情�
 - AppModelの責務が明確化され、保守性が向上
 
 ## 関連ファイル
-- `/Users/taat/git/SolarSystemClaudeCode/SolarSystemClaudeCode/AppModel.swift`
-- `/Users/taat/git/SolarSystemClaudeCode/SolarSystemClaudeCode/ImmersiveView.swift`
-- `/Users/taat/git/SolarSystemClaudeCode/SolarSystemClaudeCode/VolumeView.swift`
-- `/Users/taat/git/SolarSystemClaudeCode/SolarSystemClaudeCode/ContentView.swift`
+- `/Users/YourUserName/git/SolarSystemClaudeCode/SolarSystemClaudeCode/AppModel.swift`
+- `/Users/YourUserName/git/SolarSystemClaudeCode/SolarSystemClaudeCode/ImmersiveView.swift`
+- `/Users/YourUserName/git/SolarSystemClaudeCode/SolarSystemClaudeCode/VolumeView.swift`
+- `/Users/YourUserName/git/SolarSystemClaudeCode/SolarSystemClaudeCode/ContentView.swift`

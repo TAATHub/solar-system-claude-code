@@ -78,7 +78,7 @@ graph TD
 - なし（既存のOrbitSystemとRotationSystemはそのまま動作）
 
 ## 関連ファイル
-- `/Users/taat/git/SolarSystemClaudeCode/SolarSystemClaudeCode/ImmersiveView.swift`
+- `/Users/YourUserName/git/SolarSystemClaudeCode/SolarSystemClaudeCode/ImmersiveView.swift`
 
 ## コミット
 - コミットID: 4b8c06b

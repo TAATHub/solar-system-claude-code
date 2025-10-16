@@ -55,9 +55,9 @@ ImmersiveViewで使用していたOrbitAnimationによる円周運動の実装�
 - 今後、自転や複数天体を追加する際は、同様のパターンで実装可能
 
 ## 関連ファイル
-- `/Users/taat/git/SolarSystemClaudeCode/SolarSystemClaudeCode/OrbitComponent.swift`（新規）
-- `/Users/taat/git/SolarSystemClaudeCode/SolarSystemClaudeCode/OrbitSystem.swift`（新規）
-- `/Users/taat/git/SolarSystemClaudeCode/SolarSystemClaudeCode/ImmersiveView.swift`（修正）
+- `/Users/YourUserName/git/SolarSystemClaudeCode/SolarSystemClaudeCode/OrbitComponent.swift`（新規）
+- `/Users/YourUserName/git/SolarSystemClaudeCode/SolarSystemClaudeCode/OrbitSystem.swift`（新規）
+- `/Users/YourUserName/git/SolarSystemClaudeCode/SolarSystemClaudeCode/ImmersiveView.swift`（修正）
 
 ## ビルド&実行結果
 ✅ ビルド成功

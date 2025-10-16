@@ -9,13 +9,13 @@ Z-up座標系からY-up座標系に変換する回転処理が複数箇所で重
 ## 変更点
 
 ### 1. Entity+Transform.swift の新規作成
-- パス: `/Users/taat/git/SolarSystemClaudeCode/SolarSystemClaudeCode/Extensions/Entity+Transform.swift`
+- パス: `/Users/YourUserName/git/SolarSystemClaudeCode/SolarSystemClaudeCode/Extensions/Entity+Transform.swift`
 - 追加メソッド: `applyZUpToYUpConversion()`
   - Z-up座標系からY-up座標系への変換用の回転を適用
   - X軸周りに-90度回転を実行
 
 ### 2. ImmersiveView.swift の修正
-- パス: `/Users/taat/git/SolarSystemClaudeCode/SolarSystemClaudeCode/ImmersiveView.swift`
+- パス: `/Users/YourUserName/git/SolarSystemClaudeCode/SolarSystemClaudeCode/ImmersiveView.swift`
 - 変更箇所: L34
 - 変更内容:
   ```swift
@@ -27,7 +27,7 @@ Z-up座標系からY-up座標系に変換する回転処理が複数箇所で重
   ```
 
 ### 3. CelestialBodyModel.swift の修正
-- パス: `/Users/taat/git/SolarSystemClaudeCode/SolarSystemClaudeCode/CelestialBodyModel.swift`
+- パス: `/Users/YourUserName/git/SolarSystemClaudeCode/SolarSystemClaudeCode/CelestialBodyModel.swift`
 - 変更箇所: L66
 - 変更内容:
   ```swift
@@ -42,9 +42,9 @@ Z-up座標系からY-up座標系に変換する回転処理が複数箇所で重
 なし。既存の動作を維持したまま、コードの可読性と保守性が向上。
 
 ## 関連ファイル
-- `/Users/taat/git/SolarSystemClaudeCode/SolarSystemClaudeCode/Extensions/Entity+Transform.swift` (新規)
-- `/Users/taat/git/SolarSystemClaudeCode/SolarSystemClaudeCode/ImmersiveView.swift`
-- `/Users/taat/git/SolarSystemClaudeCode/SolarSystemClaudeCode/CelestialBodyModel.swift`
+- `/Users/YourUserName/git/SolarSystemClaudeCode/SolarSystemClaudeCode/Extensions/Entity+Transform.swift` (新規)
+- `/Users/YourUserName/git/SolarSystemClaudeCode/SolarSystemClaudeCode/ImmersiveView.swift`
+- `/Users/YourUserName/git/SolarSystemClaudeCode/SolarSystemClaudeCode/CelestialBodyModel.swift`
 
 ## 動作確認
 - ビルド: 成功（エラー・警告なし）

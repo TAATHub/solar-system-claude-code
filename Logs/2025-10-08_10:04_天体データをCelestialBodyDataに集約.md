@@ -37,9 +37,9 @@ ImmersiveView.swiftのRealityViewクロージャ内に直接記述されてい�
 なし。既存の機能に影響を与えない安全なリファクタリング。
 
 ## 関連ファイル
-- `/Users/taat/git/SolarSystemClaudeCode/SolarSystemClaudeCode/CelestialBodyData.swift` (新規作成)
-- `/Users/taat/git/SolarSystemClaudeCode/SolarSystemClaudeCode/ImmersiveView.swift` (修正)
-- `/Users/taat/git/SolarSystemClaudeCode/SolarSystemClaudeCode/CelestialBodyModel.swift` (参照のみ)
+- `/Users/YourUserName/git/SolarSystemClaudeCode/SolarSystemClaudeCode/CelestialBodyData.swift` (新規作成)
+- `/Users/YourUserName/git/SolarSystemClaudeCode/SolarSystemClaudeCode/ImmersiveView.swift` (修正)
+- `/Users/YourUserName/git/SolarSystemClaudeCode/SolarSystemClaudeCode/CelestialBodyModel.swift` (参照のみ)
 
 ## 設計上の改善点
 1. **関心の分離**: データ定義とUIロジックを明確に分離

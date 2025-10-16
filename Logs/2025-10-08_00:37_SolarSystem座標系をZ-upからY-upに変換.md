@@ -26,8 +26,8 @@ SolarSystemシーンのUp AxisがZ軸になっているため、RealityKitの標
 - 自転軸の傾きや公転軌道への影響なし
 
 ## 関連ファイル
-- `/Users/taat/git/SolarSystemClaudeCode/SolarSystemClaudeCode/CelestialBodyModel.swift` (L66)
-- `/Users/taat/git/SolarSystemClaudeCode/SolarSystemClaudeCode/ImmersiveView.swift` (L34)
+- `/Users/YourUserName/git/SolarSystemClaudeCode/SolarSystemClaudeCode/CelestialBodyModel.swift` (L66)
+- `/Users/YourUserName/git/SolarSystemClaudeCode/SolarSystemClaudeCode/ImmersiveView.swift` (L34)
 
 ## ビルド結果
 - ✅ ビルド成功

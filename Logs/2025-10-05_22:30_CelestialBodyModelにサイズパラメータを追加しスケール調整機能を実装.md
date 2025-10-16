@@ -84,8 +84,8 @@ let moonModel = CelestialBodyModel(
 
 ## 関連ファイル
 
-- `/Users/taat/git/SolarSystemClaudeCode/SolarSystemClaudeCode/CelestialBodyModel.swift` (CelestialBodyModel.swift:13-21, 58-59)
-- `/Users/taat/git/SolarSystemClaudeCode/SolarSystemClaudeCode/ImmersiveView.swift` (ImmersiveView.swift:32, 46)
+- `/Users/YourUserName/git/SolarSystemClaudeCode/SolarSystemClaudeCode/CelestialBodyModel.swift` (CelestialBodyModel.swift:13-21, 58-59)
+- `/Users/YourUserName/git/SolarSystemClaudeCode/SolarSystemClaudeCode/ImmersiveView.swift` (ImmersiveView.swift:32, 46)
 
 ## ビルド&実行結果
 

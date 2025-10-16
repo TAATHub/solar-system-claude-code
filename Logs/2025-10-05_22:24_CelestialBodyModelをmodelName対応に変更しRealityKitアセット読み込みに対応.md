@@ -100,8 +100,8 @@ guard let (earthOrbitContainer, _) = await CelestialBodyFactory.addCelestialBody
 
 ## 関連ファイル
 
-- `/Users/taat/git/SolarSystemClaudeCode/SolarSystemClaudeCode/CelestialBodyModel.swift` (CelestialBodyModel.swift:11-83)
-- `/Users/taat/git/SolarSystemClaudeCode/SolarSystemClaudeCode/ImmersiveView.swift` (ImmersiveView.swift:29-53)
+- `/Users/YourUserName/git/SolarSystemClaudeCode/SolarSystemClaudeCode/CelestialBodyModel.swift` (CelestialBodyModel.swift:11-83)
+- `/Users/YourUserName/git/SolarSystemClaudeCode/SolarSystemClaudeCode/ImmersiveView.swift` (ImmersiveView.swift:29-53)
 
 ## ビルド&実行結果
 
