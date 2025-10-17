@@ -23,20 +23,32 @@ https://github.com/user-attachments/assets/4fab691a-8203-40a3-8120-54baacf81d1f
 
 ```
 SolarSystemClaudeCode/
-├── SolarSystemClaudeCodeApp.swift    # アプリエントリーポイント
-├── AppModel.swift                     # アプリ状態管理
-├── ContentView.swift                  # メインビュー
-├── ImmersiveView.swift               # Immersive Space用ビュー
-├── VolumeView.swift                  # Volume用ビュー
-├── SolarSystemBuilder.swift          # 太陽系の構築ロジック
-├── CelestialBodyData.swift           # 天体データ定義
-├── CelestialBodyModel.swift          # 天体モデル
-├── OrbitComponent.swift              # 公転コンポーネント
-├── OrbitSystem.swift                 # 公転システム
-├── RotationComponent.swift           # 自転コンポーネント
-├── RotationSystem.swift              # 自転システム
-├── CelestialBodyInfoComponent.swift  # 天体情報コンポーネント
-└── Entity+Skybox.swift               # Skybox拡張
+├── App/
+│   └── SolarSystemClaudeCodeApp.swift         # アプリエントリーポイント
+├── Models/
+│   ├── AppModel.swift                         # アプリ状態管理
+│   ├── CelestialBodyData.swift                # 天体データ定義
+│   └── CelestialBodyModel.swift               # 天体モデル
+├── Views/
+│   ├── ContentView.swift                      # メインビュー
+│   ├── ImmersiveView.swift                    # Immersive Space用ビュー
+│   ├── VolumeView.swift                       # Volume用ビュー
+│   └── Components/
+│       └── ToggleImmersiveSpaceButton.swift   # Immersive Space切替ボタン
+├── RealityKit/
+│   ├── Builders/
+│   │   └── SolarSystemBuilder.swift           # 太陽系の構築ロジック
+│   ├── Components/
+│   │   ├── OrbitComponent.swift               # 公転コンポーネント
+│   │   ├── RotationComponent.swift            # 自転コンポーネント
+│   │   └── CelestialBodyInfoComponent.swift   # 天体情報コンポーネント
+│   └── Systems/
+│       ├── OrbitSystem.swift                  # 公転システム
+│       └── RotationSystem.swift               # 自転システム
+└── Extensions/
+    ├── Entity+Skybox.swift                    # Skybox拡張
+    ├── Entity+Transform.swift                 # Transform拡張
+    └── View+Debug.swift                       # デバッグ用View拡張
 ```
 
 ## 動作要件
