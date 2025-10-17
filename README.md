@@ -2,7 +2,7 @@
 
 visionOS向けの3D太陽系シミュレーションアプリケーションです。Immersive SpaceとVolumeの両方で太陽系を体験でき、天体にタッチすることで詳細情報を確認できます。
 
-![デモ動画](https://drive.google.com/file/d/1ScSIVKoFV_wMpggmanNgDmt1qT1D21Dv/view?usp=sharing)
+https://github.com/user-attachments/assets/4fab691a-8203-40a3-8120-54baacf81d1f
 
 ## 特徴
 
