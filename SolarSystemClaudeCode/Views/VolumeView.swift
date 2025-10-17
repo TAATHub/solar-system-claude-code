@@ -13,12 +13,6 @@ struct VolumeView: View {
     @State private var selectedCelestialBodyName: String?
     @State private var selectedCelestialBodyDescription: String?
 
-    init() {
-        // Systemの登録は一度だけ実行されるようにinitで行う
-        OrbitSystem.registerSystem()
-        RotationSystem.registerSystem()
-    }
-
     var body: some View {
         RealityView { content in
             await SolarSystemBuilder.build(

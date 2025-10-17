@@ -6,13 +6,24 @@
 //
 
 import SwiftUI
+import RealityKit
 
 @main
 struct SolarSystemClaudeCodeApp: App {
 
+    init() {
+        // Component/Systemの登録をアプリ起動時に一度だけ実行
+        OrbitComponent.registerComponent()
+        RotationComponent.registerComponent()
+        CelestialBodyInfoComponent.registerComponent()
+
+        OrbitSystem.registerSystem()
+        RotationSystem.registerSystem()
+    }
+
     @State private var appModel = AppModel()
 
-    var body: some Scene {
+    var body: some SwiftUI.Scene {
         WindowGroup {
             ContentView()
                 .environment(appModel)
