@@ -7,7 +7,7 @@
 
 import RealityKit
 
-struct RotationComponent: Component {
+struct RotationComponent: Component, Codable {
     /// 回転軸
     let axis: SIMD3<Float>
     /// 角速度（ラジアン/秒）

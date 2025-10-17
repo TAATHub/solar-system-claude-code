@@ -93,7 +93,6 @@ struct MyGameApp: App {
 - **Component/Systemは必ず登録する**
 - **update(context:)は軽量化する**
 - **EntityQueryで対象を絞る**
-- **Codableを使いReality Composer Pro対応にする**
 - **Systemはステートレス設計**
 - **パフォーマンスを考慮してO(n)処理にする**
 - **デバッグにはRealityKit Debuggerを活用**
