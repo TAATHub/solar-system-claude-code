@@ -36,7 +36,7 @@ struct VolumeView: View {
 
             let infoPanelEntity = Entity()
             infoPanelEntity.name = "InfoPanel"
-            infoPanelEntity.position = [0, 0.3, 0]
+            infoPanelEntity.position = [0, 0, 0]
 
             // ViewAttachmentComponentを使用してSwiftUIビューをアタッチ
             let infoView = VStack(spacing: 8) {
